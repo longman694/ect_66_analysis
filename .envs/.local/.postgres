@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=ect_66_analysis
+POSTGRES_USER=bivRMVVUlAGWqYZDxfsPkUnlzidUinFw
+POSTGRES_PASSWORD=Js7iVhB0GtGLr5f70QIiPE6BvHXsOwQuteTEkK6wR2OWOOeh64iErYayQxC9i2Fe
