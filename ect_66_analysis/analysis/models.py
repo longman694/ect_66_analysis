@@ -37,6 +37,9 @@ class Party(models.Model):
     def __str__(self):
         return f'[{self.party_no}] {self.name}'
 
+    class Meta:
+        ordering = ('party_no',)
+
 
 class CandidateConstituency(models.Model):
     mp_app_id = models.CharField(max_length=20, primary_key=True)
