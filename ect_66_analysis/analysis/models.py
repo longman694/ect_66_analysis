@@ -101,3 +101,12 @@ class ResultConstituenciesStatus(models.Model):
 
     def __str__(self):
         return f'{self.cons} - {self.prov} - {self.percent_turn_out}%'
+
+
+class ResultSummary(models.Model):
+    party = models.ForeignKey(Party, models.CASCADE)
+    constituencies_count = models.IntegerField(default=0)
+    party_list_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.party} cons: {self.constituencies_count} party list: {self.party_list_count}'

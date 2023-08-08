@@ -6,7 +6,8 @@ from sqlalchemy import create_engine
 
 from ect_66_analysis.analysis.models import (
     Province, Constituency, Party, CandidateConstituency, CandidatePartyList,
-    CandidatePM, ResultConstituenciesPartyListConst, ResultConstituenciesStatus, ResultConstituenciesCandidateConst
+    CandidatePM, ResultConstituenciesPartyListConst, ResultConstituenciesStatus, ResultConstituenciesCandidateConst,
+    ResultSummary
 )
 
 
@@ -18,6 +19,7 @@ class Command(BaseCommand):
         env = environ.Env()
         engine = create_engine(env.str('DATABASE_URL'))
 
+        ResultSummary.objects.all().delete()
         ResultConstituenciesStatus.objects.all().delete()
         ResultConstituenciesCandidateConst.objects.all().delete()
         ResultConstituenciesPartyListConst.objects.all().delete()
@@ -83,3 +85,29 @@ class Command(BaseCommand):
             df.index.name = 'id'
             df.to_sql('analysis_resultconstituenciesstatus',
                       conn, if_exists='append')
+
+            # ref: https://www.bbc.com/thai/articles/c3g79jd8qj1o
+            result_summary_data = (
+                (726, 112, 39),
+                (705, 112, 29),
+                (709, 68, 3),
+                (743, 39, 1),
+                (763, 23, 13),
+                (701, 22, 3),
+                (707, 9, 1),
+                (740, 7, 2),
+                (762, 5, 1),
+                (773, 2, 0),
+                (706, 1, 1),
+                (719, 0, 1),
+                (712, 0 ,1),
+                (778, 0, 1),
+                (776, 0, 1),
+                (747, 0, 1),
+                (761, 0, 1),
+                (714, 0, 1),
+            )
+            df = pd.DataFrame(result_summary_data, columns=['party_id', 'constituencies_count', 'party_list_count'])
+            df.index += 1
+            df.index.name = 'id'
+            df.to_sql('analysis_resultsummary', conn, if_exists='append')
