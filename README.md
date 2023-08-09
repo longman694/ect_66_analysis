@@ -7,6 +7,44 @@ Analyze the result of ECT 66
 
 License: MIT
 
+## Installation
+
+Install mysql and create database (replace <db_name> with your setting)
+
+```mysql
+CREATE DATABASE <db_name> CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+```
+
+create `.env` (replace <user>/<password>/<host>/<db_name> with your setting)
+
+```
+DATABASE_URL=mysql://<user>:<password>@<host>/<db_name>?charset=utf8mb4
+DJANGO_DEBUG=True
+USE_DOCKER=False
+```
+
+create virtual env and install dependencies
+
+```bash
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements/local.txt
+```
+
+populate database
+
+```bash
+./manage.py migrate
+./manage.py import_ect_66
+```
+
+run notebook
+
+```bash
+jupyter notebook
+```
+
+
 ## Settings
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).

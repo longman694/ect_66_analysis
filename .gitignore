@@ -329,6 +329,7 @@ ect_66_analysis/media/
 
 .pytest_cache/
 .ipython/
+.ipynb_checkpoints/
 .env
 .envs/*
 !.envs/.local/
